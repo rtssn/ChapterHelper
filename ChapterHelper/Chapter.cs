@@ -8,13 +8,28 @@ namespace ChapterHelper
 {
     internal class Chapter
     {
-        public string ChapterTitle
+        /// <summary>
+        /// チャプターのタイトルを取得/設定します。
+        /// </summary>
+        public string? Title
         {
             get;
             set;
         }
 
-        public int Timestamp
+        /// <summary>
+        /// チャプターの開始時間を取得/設定します。
+        /// </summary>
+        public int Start
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// チャプターの終了時間を取得/設定します。
+        /// </summary>
+        public int End
         {
             get;
             set;

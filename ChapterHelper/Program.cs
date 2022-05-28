@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ChapterHelper
 {
@@ -28,9 +29,13 @@ namespace ChapterHelper
             }
 
             List<Chapter> chapters = new List<Chapter>();
+            StringBuilder outputBuilder = new StringBuilder();
+
 
             using(StreamReader reader = new StreamReader(inputFile))
             {
+                int count = 0;
+
                 while (!reader.EndOfStream)
                 {
                     string? line = reader.ReadLine();
@@ -51,10 +56,27 @@ namespace ChapterHelper
                         int timestamp = (hour * 60 + min * 60 + second) * 1000;
 
                         Chapter chapter = new Chapter();
-                        chapter.ChapterTitle = chapterTitle;
-                        chapter.Timestamp = timestamp;
+                        chapter.Title = chapterTitle;
+                        chapter.Start = timestamp;
+                        chapter.End = 0;
+
+                        int index = count - 1;
+
+                        if(index >= 0)
+                        {
+                            chapters[index].End = timestamp;
+                        }
+
+                        string chapterText = "[CHAPTER]\n"
+                            + "TIMEBASE=1/1000\n"
+                            + $"START={chapter.Start}\n"
+                            + $"END={chapter.End}"
+                            + $"title={chapter.Title}\n";
+
+                        outputBuilder.Append(chapterText);
 
                         chapters.Add(chapter);
+                        count++;
                     }
                 }
             }
