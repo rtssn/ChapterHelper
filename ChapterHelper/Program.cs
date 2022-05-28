@@ -71,7 +71,7 @@ namespace ChapterHelper
                             + "TIMEBASE=1/1000\n"
                             + $"START={chapter.Start}\n"
                             + $"END={chapter.End}"
-                            + $"title={chapter.Title}\n";
+                            + $"title={chapter.Title}";
 
                         outputBuilder.Append(chapterText);
 
@@ -79,6 +79,14 @@ namespace ChapterHelper
                         count++;
                     }
                 }
+            }
+
+            Encoding encoding = new UTF8Encoding(false);
+
+            using (StreamWriter writer = new StreamWriter(outputFile, false, encoding))
+            {
+                string output = outputBuilder.ToString();
+                writer.Write(output);
             }
         }
     }
