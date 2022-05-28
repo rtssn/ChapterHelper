@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ChapterHelper": {
+      "commandName": "Project",
+      "commandLineArgs": "chapters.txt out.txt"
+    }
+  }
+}
